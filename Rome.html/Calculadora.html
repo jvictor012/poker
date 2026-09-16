@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Calculadora de Probabilidade</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #071521;
+            color: #dceef7;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* CABEÇALHO */
+
+        header {
+            background-color: #0b2233;
+            padding: 35px 20px;
+            text-align: center;
+            border-bottom: 2px solid #00a8e8;
+        }
+
+        h1 {
+            color: #00bfff;
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #a9c5d4;
+            font-size: 16px;
+        }
+
+        /* CONTEÚDO */
+
+        main {
+            width: 85%;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        h2 {
+            color: #00bfff;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* CALCULADORA */
+
+        .calculadora {
+            background-color: #0d2739;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #16445e;
+        }
+
+        .calculadora p {
+            color: #c9dce6;
+            font-size: 17px;
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #00bfff;
+            font-weight: bold;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            background-color: #071521;
+            color: white;
+            border: 1px solid #176080;
+            border-radius: 7px;
+            font-size: 16px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #00bfff;
+        }
+
+        button {
+            background-color: #00a8e8;
+            color: white;
+            border: none;
+            padding: 13px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #008bc2;
+        }
+
+        #resultado {
+            margin-top: 25px;
+            padding: 18px;
+            background-color: #071521;
+            border-radius: 8px;
+            color: #00bfff;
+            font-size: 21px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* EXEMPLO */
+
+        .exemplo {
+            margin-top: 25px;
+            padding: 20px;
+            background-color: #0b2233;
+            border-left: 5px solid #00a8e8;
+            border-radius: 8px;
+        }
+
+        .exemplo strong {
+            color: #00bfff;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            margin-top: 80px;
+            padding: 25px;
+            text-align: center;
+            background-color: #0b2233;
+            color: #789aaa;
+            border-top: 1px solid #16445e;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- CABEÇALHO -->
+
+    <header>
+
+        <h1>Poker Helper</h1>
+    
+        <p>
+            Calculadora Simplificada de Probabilidade
+        </p>
+    
+        <button onclick="window.location.href='index.html'">
+            Voltar
+        </button>
+    
+    </header>
+
+
+    <!-- CONTEÚDO -->
+
+    <main>
+
+        <h2>Calculadora de Probabilidade</h2>
+
+
+        <div class="calculadora">
+
+            <p>
+                Informe o número de cartas favoráveis e o número de
+                cartas restantes no baralho para calcular a probabilidade.
+            </p>
+
+
+            <label for="cartasFavoraveis">
+                Cartas favoráveis:
+            </label>
+
+            <input
+                type="number"
+                id="cartasFavoraveis"
+                min="0"
+                placeholder="Ex: 9"
+            >
+
+
+            <label for="cartasRestantes">
+                Cartas restantes no baralho:
+            </label>
+
+            <input
+                type="number"
+                id="cartasRestantes"
+                min="1"
+                placeholder="Ex: 47"
+            >
+
+
+            <button onclick="calcularProbabilidade()">
+                Calcular Probabilidade
+            </button>
+
+
+            <div id="resultado">
+                Informe os valores acima.
+            </div>
+
+        </div>
+
+
+        <!-- EXEMPLO -->
+
+        <div class="exemplo">
+
+            <p>
+                <strong>Exemplo:</strong>
+                Se houver 9 cartas favoráveis e 47 cartas restantes:
+                <strong>9 ÷ 47 × 100 = 19,15%</strong>
+            </p>
+
+        </div>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        Poker Helper • Calculadora de Probabilidade
+
+    </footer>
+
+
+    <script>
+
+        function calcularProbabilidade() {
+
+            let favoraveis = Number(
+                document.getElementById("cartasFavoraveis").value
+            );
+
+            let restantes = Number(
+                document.getElementById("cartasRestantes").value
+            );
+
+            let resultado = document.getElementById("resultado");
+
+
+            // Verifica se os campos foram preenchidos
+
+            if (
+                document.getElementById("cartasFavoraveis").value === "" ||
+                document.getElementById("cartasRestantes").value === ""
+            ) {
+
+                resultado.textContent =
+                    "Preencha todos os campos.";
+
+                return;
+            }
+
+
+            // Verifica números negativos
+
+            if (favoraveis < 0 || restantes < 0) {
+
+                resultado.textContent =
+                    "Não é permitido usar números negativos.";
+
+                return;
+            }
+
+
+            // Evita divisão por zero
+
+            if (restantes === 0) {
+
+                resultado.textContent =
+                    "O número de cartas restantes não pode ser zero.";
+
+                return;
+            }
+
+
+            // Verifica se favoráveis são maiores que restantes
+
+            if (favoraveis > restantes) {
+
+                resultado.textContent =
+                    "As cartas favoráveis não podem ser maiores que as cartas restantes.";
+
+                return;
+            }
+
+
+            // Calcula a probabilidade
+
+            let probabilidade =
+                (favoraveis / restantes) * 100;
+
+
+            // Mostra o resultado
+
+            resultado.textContent =
+                "Probabilidade: " +
+                probabilidade.toFixed(2) +
+                "%";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

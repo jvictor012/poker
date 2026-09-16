@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Poker Helper</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #071521;
+            color: #dceef7;
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+        }
+
+        /* CABEÇALHO */
+
+        header {
+            background-color: #0b2233;
+            padding: 35px 20px;
+            text-align: center;
+            border-bottom: 2px solid #00a8e8;
+        }
+
+        h1 {
+            color: #00bfff;
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
+
+        header p {
+            color: #a9c5d4;
+            font-size: 16px;
+        }
+
+        /* CONTEÚDO */
+
+        main {
+            width: 85%;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        h2 {
+            color: #00bfff;
+            font-size: 27px;
+            margin-top: 40px;
+            margin-bottom: 15px;
+        }
+
+        h3 {
+            color: #55d6ff;
+            font-size: 23px;
+            margin-top: 40px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #c9dce6;
+            font-size: 17px;
+        }
+
+        /* CAIXAS DE TEXTO */
+
+        .texto {
+            background-color: #0d2739;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid #16445e;
+            margin-bottom: 20px;
+        }
+
+        /* ETAPAS */
+
+        .etapa {
+            background-color: #0d2739;
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 5px solid #00a8e8;
+        }
+
+        .etapa strong {
+            color: #00bfff;
+            font-size: 19px;
+        }
+
+        /* CLASSIFICAÇÃO */
+
+        .classificacao {
+            background-color: #0d2739;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #16445e;
+            margin-top: 20px;
+        }
+
+        .mao {
+            padding: 13px 0;
+            border-bottom: 1px solid #1b4358;
+        }
+
+        .mao:last-child {
+            border-bottom: none;
+        }
+
+        .mao strong {
+            color: #00bfff;
+        }
+
+        .mao p {
+            margin-top: 5px;
+        }
+
+        /* ANALISADOR */
+
+        .analisador {
+            background-color: #0d2739;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #16445e;
+            margin-top: 20px;
+        }
+
+        .cartas {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .carta {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .carta label {
+            color: #00bfff;
+            font-weight: bold;
+        }
+
+        select {
+            background-color: #071521;
+            color: white;
+            border: 1px solid #176080;
+            border-radius: 7px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #00a8e8;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #008bc2;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #071521;
+            border-radius: 8px;
+            color: #00bfff;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        /* RODAPÉ */
+
+        footer {
+            margin-top: 60px;
+            padding: 25px;
+            text-align: center;
+            background-color: #0b2233;
+            color: #789aaa;
+            border-top: 1px solid #16445e;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <!-- CABEÇALHO -->
+
+    <header>
+
+        <h1>Poker Helper</h1>
+
+        <p>
+            Aprenda os conceitos básicos do Texas Hold'em
+        </p>
+
+        <button onclick="window.location.href='Calculadora.html'">
+            Calculadora
+        </button>
+
+    </header>
+
+
+    <main>
+
+        <!-- INTRODUÇÃO -->
+
+        <div class="texto">
+
+            <p>
+                Esse jogo é a modalidade de pôquer mais jogada no mundo,
+                em que cada participante recebe duas cartas individuais
+                e usa cinco cartas comunitárias para formar a melhor
+                combinação de cinco cartas.
+            </p>
+
+        </div>
+
+
+        <!-- QUANTIDADE DE CARTAS -->
+
+        <h2>Quantidade de cartas recebidas por cada jogador</h2>
+
+        <div class="texto">
+
+            <p>
+                No Texas Hold'em, cada jogador recebe exatamente duas
+                cartas individuais (chamadas de hole cards ou cartas
+                fechadas) no início de cada rodada. Essas cartas são
+                distribuídas viradas para baixo, ou seja, apenas você
+                pode vê-las e usá-las.
+            </p>
+
+        </div>
+
+
+        <div class="texto">
+
+            <p>
+                O restante do jogo se desenvolve com a distribuição de
+                mais 5 cartas comunitárias no centro da mesa, abertas
+                para todos. O seu objetivo final será escolher as 5
+                melhores cartas possíveis entre as duas da sua mão e
+                as cinco da mesa para formar o seu jogo.
+            </p>
+
+        </div>
+
+
+        <!-- ETAPAS -->
+
+        <h3>
+            Explicação resumida das etapas:
+            Pré-Flop, Flop, Turn e River
+        </h3>
+
+
+        <div class="etapa">
+
+            <strong>Pré-Flop:</strong>
+
+            É o início de tudo. Cada jogador recebe suas duas cartas
+            fechadas e a primeira rodada de apostas acontece apenas
+            com base nelas, antes de qualquer carta aparecer na mesa.
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>Flop:</strong>
+
+            O dealer revela três cartas comunitárias na mesa.
+            Depois disso, acontece uma nova rodada de apostas.
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>Turn:</strong>
+
+            O dealer revela a quarta carta comunitária. As opções
+            de combinação aumentam e ocorre a terceira rodada de
+            apostas, geralmente com valores mais altos.
+
+        </div>
+
+
+        <div class="etapa">
+
+            <strong>River:</strong>
+
+            O dealer abre a quinta e última carta comunitária.
+            É a rodada final de apostas. Quem não desistiu revela
+            as cartas (showdown) e quem tiver a melhor combinação
+            de 5 cartas leva todas as fichas.
+
+        </div>
+
+
+        <!-- CLASSIFICAÇÃO -->
+
+        <h2>Classificação das mãos</h2>
+
+
+        <div class="classificacao">
+
+            <div class="mao">
+
+                <strong>1. Royal Flush</strong>
+
+                <p>
+                    É a combinação mais alta do poker, formada por Ás,
+                    Rei, Dama, Valete e Dez do mesmo naipe.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>2. Straight Flush</strong>
+
+                <p>
+                    Cinco cartas em sequência e do mesmo naipe.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>3. Quadra</strong>
+
+                <p>
+                    Quatro cartas do mesmo valor.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>4. Full House</strong>
+
+                <p>
+                    Uma trinca + um par.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>5. Flush</strong>
+
+                <p>
+                    Cinco cartas do mesmo naipe, sem precisar estar
+                    em sequência.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>6. Sequência</strong>
+
+                <p>
+                    Cinco cartas em sequência, de naipes diferentes.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>7. Trinca</strong>
+
+                <p>
+                    Três cartas do mesmo valor.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>8. Dois Pares</strong>
+
+                <p>
+                    Dois pares diferentes.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>9. Um Par</strong>
+
+                <p>
+                    Duas cartas do mesmo valor.
+                </p>
+
+            </div>
+
+
+            <div class="mao">
+
+                <strong>10. Carta Alta</strong>
+
+                <p>
+                    Quando nenhuma das combinações acima é formada;
+                    vale a carta mais alta.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <!-- ANALISADOR -->
+
+        <h2>Analisador de mãos</h2>
+
+
+        <div class="analisador">
+
+            <p>
+                Escolha as cinco cartas e clique em analisar para
+                descobrir qual combinação foi formada.
+            </p>
+
+
+            <br>
+
+
+            <div class="cartas">
+
+                <div class="carta">
+
+                    <label for="carta-1">Carta 1:</label>
+
+                    <select id="carta-1">
+
+                        <option value="A">Ás</option>
+                        <option value="K">Rei</option>
+                        <option value="Q">Dama</option>
+                        <option value="J">Valete</option>
+                        <option value="10">10</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="carta">
+
+                    <label for="carta-2">Carta 2:</label>
+
+                    <select id="carta-2">
+
+                        <option value="A">Ás</option>
+                        <option value="K">Rei</option>
+                        <option value="Q">Dama</option>
+                        <option value="J">Valete</option>
+                        <option value="10">10</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="carta">
+
+                    <label for="carta-3">Carta 3:</label>
+
+                    <select id="carta-3">
+
+                        <option value="A">Ás</option>
+                        <option value="K">Rei</option>
+                        <option value="Q">Dama</option>
+                        <option value="J">Valete</option>
+                        <option value="10">10</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="carta">
+
+                    <label for="carta-4">Carta 4:</label>
+
+                    <select id="carta-4">
+
+                        <option value="A">Ás</option>
+                        <option value="K">Rei</option>
+                        <option value="Q">Dama</option>
+                        <option value="J">Valete</option>
+                        <option value="10">10</option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="carta">
+
+                    <label for="carta-5">Carta 5:</label>
+
+                    <select id="carta-5">
+
+                        <option value="A">Ás</option>
+                        <option value="K">Rei</option>
+                        <option value="Q">Dama</option>
+                        <option value="J">Valete</option>
+                        <option value="10">10</option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+            <button onclick="analisarCartas()">
+                Analisar mão
+            </button>
+
+
+            <div id="resultado">
+                Nenhuma combinação
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- RODAPÉ -->
+
+    <footer>
+
+        Poker Helper • Guia básico de Poker
+
+    </footer>
+
+
+    <script>
+
+        let carta1 = document.getElementById('carta-1');
+        let carta2 = document.getElementById('carta-2');
+        let carta3 = document.getElementById('carta-3');
+        let carta4 = document.getElementById('carta-4');
+        let carta5 = document.getElementById('carta-5');
+
+        let resultadoTela = document.getElementById('resultado');
+
+
+        function analisarCartas() {
+
+            let mao = {
+                carta1: carta1.value,
+                carta2: carta2.value,
+                carta3: carta3.value,
+                carta4: carta4.value,
+                carta5: carta5.value
+            };
+
+
+            let contagem = {};
+
+
+            for (let i in mao) {
+
+                let valor = mao[i];
+
+                if (contagem[valor]) {
+
+                    contagem[valor]++;
+
+                } else {
+
+                    contagem[valor] = 1;
+
+                }
+
+            }
+
+
+            let resultado = "Nenhuma combinação";
+
+
+            for (let valor in contagem) {
+
+                if (contagem[valor] === 4) {
+
+                    resultado = "Quadra";
+                    break;
+
+                } else if (contagem[valor] === 3) {
+
+                    resultado = "Trinca";
+
+                } else if (contagem[valor] === 2) {
+
+                    if (resultado === "Um Par") {
+
+                        resultado = "Dois Pares";
+
+                    } else {
+
+                        resultado = "Um Par";
+
+                    }
+
+                }
+
+            }
+
+
+            resultadoTela.textContent = resultado;
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
